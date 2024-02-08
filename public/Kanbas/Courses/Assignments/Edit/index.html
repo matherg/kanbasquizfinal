@@ -1,0 +1,48 @@
+<html>
+<head></head>
+<body>
+<h2> Assignment Name</h2>
+<input type="text" name="AssignmentName" id="nameAssign" placeholder="A1 + Env + Html" readonly>
+<br />
+<input type="text" name="AssignmentDesc" id="descAssign" placeholder="Assignment Description" readonly>
+<br />
+Points <br />
+<input type="text" name="points" id="points" placeholder="100" readonly>
+<br />
+Assignment Group <br />
+<select>
+    <option>Assignments</option>
+    <option>Other option</option>
+</select>
+<br />
+Display Grade As <br />
+<select>
+    <option>Percentage</option>
+    <option>Decimal</option>
+</select> <br />
+Online Entry Options
+<br />
+<label><input type="checkbox" name="Text" value="Text"> Text Entry</label><br>
+<label><input type="checkbox" name="Web" value="Web"> Website URL</label><br>
+<label><input type="checkbox" name="Media" value="Media"> Media Recordings</label>
+<br />
+Assign
+<br/>
+Assign to
+<br />
+<input type="text" name="Everyone" id="everyone" placeholder="Everyone" readonly>
+<br />
+Due
+<br />
+<input type="date" name="due" id="due" placeholder="2024-01-22" readonly>
+<br />
+Available From <br />
+<input type="date" name="avail" id="avail" placeholder="2024-01-10" readonly> <br />
+Until <br />
+<input type="date" name="until" id="until" placeholder="2024-01-22" readonly> <br />
+<form action="/Kanbas/Courses/Assignments/screen.html">
+    <input type="submit" value="Cancel">
+    <input type="submit" value="Save">
+
+</form>
+</body>

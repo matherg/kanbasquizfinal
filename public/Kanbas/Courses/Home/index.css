@@ -1,0 +1,46 @@
+.sidebar {
+    background-color: #f8f9fa;
+    width: 250px;
+    font-size: 0.9em;
+}
+
+.sidebar .list-group-item {
+    border: none;
+    padding: 10px 15px;
+}
+
+
+.sidebar .list-group-item i {
+    width: 25px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.to-do-header, .feedback-header {
+    font-weight: bold;
+    color: #333;
+    background-color: #e9ecef;
+}
+
+.to-do-item, .feedback-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.to-do-title, .feedback-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.to-do-close i {
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.sidebar .list-group-item a {
+    color: red;
+    text-decoration: none;
+}
+
+
