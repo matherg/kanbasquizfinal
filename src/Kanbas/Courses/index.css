@@ -1,0 +1,26 @@
+.course-name {
+    color: red;
+    font-size: smaller;
+}
+
+.separator {
+    color: rgb(128, 128, 128);
+    font-size: smaller;
+}
+
+.active-title {
+    color: black;
+    font-size: smaller;
+}
+
+.course-layout {
+    display: flex;
+}
+
+.course-navigation {
+    width: 200px;
+}
+
+.course-content {
+    flex-grow: 1;
+}
