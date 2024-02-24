@@ -1,8 +1,15 @@
+
 function Kanbas() {
-    return(
-        <div>
-            <h1>Kanbas</h1>
+    return (
+        <div className="d-flex">
+            <div>
+                <h1>Kanbas Navigation</h1>
+            </div>
+            <div style={{ flexGrow: 1 }}>
+                <h1>Account</h1>
+                <h1>Dashboard</h1>
+                <h1>Courses</h1>
+            </div>
         </div>
-    );
-}
-export default Kanbas
+    );}
+export default Kanbas;
