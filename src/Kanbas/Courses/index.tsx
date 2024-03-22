@@ -1,4 +1,3 @@
-import { courses } from "../../Kanbas/Database";
 import {Route, Routes, useLocation, useParams} from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import "./index.css"
@@ -7,7 +6,7 @@ import Modules from "./Modules";
 import CourseNavigation from "./CourseNavigation";
 import Home from "./Home";
 import Assignments from "./Assignments";
-function Courses() {
+function Courses({ courses }: { courses: any[]; }) {
     const location = useLocation();
     const { courseId } = useParams();
     const course = courses.find(
