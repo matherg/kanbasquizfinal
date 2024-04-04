@@ -9,7 +9,7 @@ function EncodingParametersInURLs() {
     const [result, setResult] = useState(0);
 
     const fetchWelcome = async () => {
-        const response = await axios.get('${API_BASE}/a5/welcome');
+        const response = await axios.get(API_BASE +"/a5/welcome}");
         setWelcome(response.data);
     };
     const fetchSum = async (a: any, b: any) => {
@@ -52,7 +52,7 @@ function EncodingParametersInURLs() {
             </a>
             <h3>Query Parameters</h3>
             <a className="btn btn-primary"
-               href={`v/a5/calculator?operation=add&a=${a}&b=${b}`}>
+               href={`${API_BASE}/a5/calculator?operation=add&a=${a}&b=${b}`}>
                 Add {a} + {b}
             </a>
             <a className="btn btn-danger"

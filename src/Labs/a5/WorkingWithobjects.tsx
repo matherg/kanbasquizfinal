@@ -72,17 +72,17 @@ function WorkingWithObjects() {
                    onChange={(e) => setAssignment({ ...assignment,
                        completed: Boolean(e.target.checked)})}/>
             <h4>Retrieving Objects</h4>
-            <a href="${API_BASE}/a5/assignment">
+            <a href={`${API_BASE}/a5/assignment`}>
                 Get Assignment
             </a>
-            <a href="${API_BASE}/a5/module">
+            <a href={`${API_BASE}/a5/module`}>
                 Get Module
             </a>
             <h4>Retrieving Properties</h4>
-            <a href="${API_BASE}/a5/assignment/title">
+            <a href={`${API_BASE}/a5/assignment/title`}>
                 Get Title
             </a>
-            <a href="${API_BASE}/a5/module/name">
+            <a href={`${API_BASE}/a5/module/name`}>
                 Get Module Name
             </a>
         </div>
