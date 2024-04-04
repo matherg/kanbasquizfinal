@@ -1,16 +1,27 @@
 import {Route, Routes, useLocation, useParams} from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import "./index.css"
-
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Modules from "./Modules";
 import CourseNavigation from "./CourseNavigation";
 import Home from "./Home";
 import Assignments from "./Assignments";
-function Courses({ courses }: { courses: any[]; }) {
+function Courses() {
     const location = useLocation();
     const { courseId } = useParams();
-    const course = courses.find(
-        (course) => course._id === courseId);
+    const COURSES_API = "http://localhost:4000/api/courses";
+    const [course, setCourse] = useState<any>({ _id: "" });
+    const findCourseById = async (courseId?: string) => {
+        const response = await axios.get(
+            `${COURSES_API}/${courseId}`
+        );
+        setCourse(response.data);
+    };
+    useEffect(() => {
+        findCourseById(courseId);
+    }, [courseId]);
+
     const activePath = location.pathname.split('/').pop();
     return (
         <div>
