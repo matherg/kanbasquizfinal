@@ -7,6 +7,7 @@ import axios from "axios";
 import store from "./store";
 import { Provider } from "react-redux";
 
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 function Kanbas() {
     const [courses, setCourses] = useState<any[]>([]);
@@ -14,7 +15,7 @@ function Kanbas() {
         _id: "1234", name: "New Course", number: "New Number",
         startDate: "2023-09-10", endDate: "2023-12-15",
     });
-    const COURSES_API = "http://localhost:4000/api/courses";
+    const COURSES_API = `${API_BASE}/api/courses`;
     const findAllCourses = async () => {
         const response = await axios.get(COURSES_API);
         setCourses(response.data);
@@ -51,7 +52,8 @@ function Kanbas() {
         );
     };
 
-        return (
+        // @ts-ignore
+    return (
         <Provider store={store}>
 
         <div className="d-flex">
@@ -70,7 +72,7 @@ function Kanbas() {
                             updateCourse={updateCourse}/>
                     } />
                     <Route path="Courses/:courseId/*" element={
-                        <Courses courses={courses} />} />
+                        <Courses  />} />
                 </Routes>
             </div>
         </div>

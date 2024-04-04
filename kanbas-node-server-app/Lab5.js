@@ -1,4 +1,3 @@
-import {useState} from "react";
 
 const assignment = {
     id: 1, title: "NodeJS Assignment",
