@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 function WorkingWithArrays() {
     const [todo, setTodo] = useState({
@@ -73,7 +74,7 @@ const fetchTodos = async () => {
 
 
 
-        const API = "http://localhost:4000/a5/todos";
+        const API = "${API_BASE}/a5/todos";
     return (
         <div>
             {errorMessage && (
