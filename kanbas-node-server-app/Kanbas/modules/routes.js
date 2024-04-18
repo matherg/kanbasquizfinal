@@ -1,36 +1,37 @@
 import db from "../Database/index.js";
+import {findModulesForCourse} from "../../../src/Kanbas/Courses/Modules/client.js";
 function ModuleRoutes(app) {
-    app.put("/api/modules/:mid", (req, res) => {
-        const { mid } = req.params;
-        const moduleIndex = db.modules.findIndex(
-            (m) => m._id === mid);
-        db.modules[moduleIndex] = {
-            ...db.modules[moduleIndex],
-            ...req.body
+    import * as dao from "./dao.js";
+    export default function ModuleRoutes(app) {
+        const updateModule = async (req, res) => {
+            const { mid } = req.params;
+            const status = await dao.updateModule(mid, req.body);
+            res.json(status);
         };
-        res.sendStatus(204);
-    });
+        const createModule = async (req, res) => {
+            const { cid } = req.params;
+            const newModule = {
+                ...req.body,
+                course: cid,
+            };
+            const course = await dao.createModule(newModule);
+            res.json(course);
+        }
+        const deleteModule = async (req, res) => {
+            const { mid } = req.params;
+            const status = await dao.deleteModule(mid);
+            res.json(status);
+        };
+        const getModulesWithCourseId = async (req, res) => {
+            const { cid } = req.params;
+            const courses = await dao.findAllModulesWithCourseId(cid);
+            res.json(courses);
+        };
 
-    app.post("/api/courses/:cid/modules", (req, res) => {
-        const { cid } = req.params;
-        const newModule = {
-            ...req.body,
-            course: cid,
-            _id: new Date().getTime().toString(),
-        };
-        db.modules.push(newModule);
-        res.send(newModule);
-    });
-    app.delete("/api/modules/:mid", (req, res) => {
-        const {mid} = req.params;
-        db.modules = db.modules.filter((m) => m._id !== mid);
-        res.sendStatus(200);
-    });
-    app.get("/api/courses/:cid/modules", (req, res) => {
-        const { cid } = req.params;
-        const modules = db.modules
-            .filter((m) => m.course === cid);
-        res.send(modules);
-    });
+        app.post("/api/courses/:cid/modules", createModule);
+        app.put("/api/modules/:mid", updateModule);
+        app.get("/api/courses/:cid/modules", getModulesWithCourseId)
+        app.delete("/api/modules/:mid", deleteModule())
+    }
 }
 export default ModuleRoutes;
