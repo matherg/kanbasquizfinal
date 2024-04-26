@@ -24,12 +24,20 @@ function Courses() {
         findCourseById(courseId);
     }, [courseId]);
 
-    const activePath = location.pathname.split('/').pop();
+    const activePath = location.pathname.split('/');
+    let path = '';
+    if (activePath.includes('quiz-details')) {
+        path = 'Quiz Details';
+    } else if (activePath.includes('quiz-preview')) {
+        path = 'Quiz Preview';
+    } else {
+        path = String(activePath.pop());
+    }
     return (
         <div>
             <h1><HiMiniBars3 /> <span className="course-name">Course {course?.name}</span>
                 <span className="separator">{' > '}</span>
-                <span className="active-title">{activePath}</span></h1>
+                <span className="active-title">{path}</span></h1>
             <div className="course-layout">
                 <CourseNavigation />
                 <div className="course-content">

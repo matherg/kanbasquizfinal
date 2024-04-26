@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { format } from 'date-fns';
 import {useNavigate, useParams} from "react-router-dom";
-import {getQuiz} from "./client";
+import {getQuiz, updateQuiz} from "./client";
 import "./details.css"
+import {QuestionType} from "./quizDetailsEditor";
 export type QuizDetailsType = {
     quizType: string,
     course: string,
@@ -22,6 +23,7 @@ export type QuizDetailsType = {
     title: string,
     published: boolean
     description: string
+    questions: QuestionType[]
 }
 
 const QuizDetails = () => {
@@ -48,16 +50,21 @@ const QuizDetails = () => {
     const handlePublish = () => {
         // Add ability to publish/unpublish
         setIsPublished(!isPublished);
+        if (quiz && quizId) {
+            quiz.published = !isPublished
+            updateQuiz(quizId, quiz)
+        }
     };
 
+
     const navigateToPreview = () => {
-        // Code to navigate to Quiz Preview screen
+        navigate('../quiz-preview/' + quizId)
     };
 
     const navigateToEditor = () => {
         navigate(`edit`);    };
     if (!quiz) {
-        return <div>Loading...</div>; // Or some other loading state
+        return <div>Loading...</div>;
     }
     const buttonClass = isPublished ? 'outline-danger' : 'outline-success';
     const titleClass = 'quiz-title';

@@ -39,7 +39,7 @@ export default function QuizRoutes(app) {
     app.post("/api/courses/:cid/quiz", createQuiz);
     app.put("/api/quizzes/:qid", updateQuiz);
     app.get("/api/courses/:cid/quizzes", getQuizzesWithCourseId)
-    app.delete("/api/quizzes/:mid", deleteQuiz)
+    app.delete("/api/quizzes/:qid", deleteQuiz)
     app.get("/api/quizzes/:qid", getQuiz)
 }
 

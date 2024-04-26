@@ -1,4 +1,17 @@
 import mongoose from "mongoose";
+const questionSchema = new mongoose.Schema({
+    id: String,
+    points: Number,
+    title: String,
+    text: String,
+    type: {
+        type: String,
+        enum: ['multiple_choice', 'true_false', 'fill_in_blanks']
+    },
+    choices: [String],
+    correctAnswer: String,
+    blanks: [String]
+});
 const quizSchema = new mongoose.Schema({
     quizType: {
         type: String,
@@ -60,6 +73,8 @@ const quizSchema = new mongoose.Schema({
     },
     untilDate: {
         type: Date
-    }},
+    },
+    questions: [questionSchema]},
+
     { collection: "quizzes" });
 export default quizSchema;

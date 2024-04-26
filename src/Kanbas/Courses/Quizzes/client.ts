@@ -19,5 +19,5 @@ export const getQuizzesWithCourseId = async (courseId: string) => {
 };
 
 export const deleteQuiz = async (quizId: string) => {
-    return axios.delete(`${QUIZZES_API}/quizzes/${quizId}`);
+    return axios.delete(`${QUIZZES_API}/${quizId}`);
 };
