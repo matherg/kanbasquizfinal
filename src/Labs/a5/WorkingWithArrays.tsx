@@ -50,7 +50,7 @@ const fetchTodos = async () => {
 
     const deleteTodo = async (todo: any) => {
         try {
-            const response = await axios.delete(
+            await axios.delete(
                 `${API}/${todo.id}`);
             setTodos(todos.filter((t) => t.id !== todo.id));
         } catch (error) {
@@ -61,7 +61,7 @@ const fetchTodos = async () => {
     };
     const updateTodo = async () => {
         try {
-            const response = await axios.put(
+            await axios.put(
                 `${API}/${todo.id}`, todo);
             setTodos(todos.map((t) => (
                 t.id === todo.id ? todo : t)));

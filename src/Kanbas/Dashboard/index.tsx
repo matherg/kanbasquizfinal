@@ -6,8 +6,8 @@ function Dashboard(
     { courses, course, setCourse, addNewCourse,
         deleteCourse, updateCourse }: {
         courses: any[]; course: any; setCourse: (course: any) => void;
-        addNewCourse: () => void; deleteCourse: (course: any) => void;
-        updateCourse: () => void; }) {
+        addNewCourse: (course: any) => void; deleteCourse: (course: any) => void;
+        updateCourse: (course: any) => void; }) {
 
     return (
         <div className="p-4">
@@ -28,11 +28,11 @@ function Dashboard(
                 Update
             </button>
 
-            <h2>Published Courses (12)</h2> <hr />
+            <h2>Published Courses </h2> <hr />
             <div className="row">
                 <div className="row row-cols-1 row-cols-md-5 g-4">
                     {courses.map((course) => (
-                        <div key={course._id} className="col" style={{ width: 300 }}>
+                        <div key={course.id} className="col" style={{ width: 300 }}>
                             <div className="card">
                                 <img src={`/images/${course.image}`} className="card-img-top"
                                      style={{ height: 150 }}/>
@@ -49,12 +49,12 @@ function Dashboard(
 
                                         <button onClick={(event) => {
                                             event.preventDefault();
-                                            deleteCourse(course._id);
+                                            deleteCourse(course.id);
                                         }}>
                                             Delete
                                         </button> </Link>
                                     <p className="card-text">{course.name}</p>
-                                    <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">
+                                    <Link to={`/Kanbas/Courses/${course.id}/Home`} className="btn btn-primary">
                                         Go </Link>
                                 </div>
                             </div>

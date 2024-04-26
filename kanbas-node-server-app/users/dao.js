@@ -1,8 +1,16 @@
 
 import model from "./model.js";
 
-export const findUserByCredentials = (username, password) => model.findOne({ username, password });
-
+export const findUserByCredentials = async (username, password) => {
+    try {
+        const user = await model.findOne({ username: "strider", password: "aragorn123" });
+        console.log(user); // Log the user object to see if it's found
+        return user;
+    } catch (error) {
+        console.error("Error in findUserByCredentials:", error);
+        throw error;
+    }
+};
 export const createUser = (user) => {
     delete user._id
     return model.create(user);

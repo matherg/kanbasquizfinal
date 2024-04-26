@@ -28,10 +28,11 @@ function Kanbas() {
     const addNewCourse = async () => {
         const response = await axios.post(COURSES_API, course);
         setCourses([ ...courses, response.data ]);
+        setCourse(response.data)
     };
 
     const deleteCourse = async (courseId: string) => {
-        const response = await axios.delete(
+         await axios.delete(
             `${COURSES_API}/${courseId}`
         );
         setCourses(courses.filter(

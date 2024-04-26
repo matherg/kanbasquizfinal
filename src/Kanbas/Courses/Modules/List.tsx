@@ -1,77 +1,75 @@
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    deleteModule,
-    addModule,  updateModule,  setModule,  setModules,
-} from "./reducer";
 import * as client from "./client";
 
-import { KanbasState } from "../../store";
 function ModuleList() {
-    const { courseId  } = useParams();
+    const { courseId } = useParams();
+    const [moduleList, setModuleList] = useState<any[]>([])
+    const [module, setModule] = useState({ name: "", description: "",
+        _id: "1234"});
 
-    const moduleList = useSelector((state: KanbasState) =>
-        state.modulesReducer.modules);
-    const module = useSelector((state: KanbasState) =>
-        state.modulesReducer.module);
     useEffect(() => {
-        client.findModulesForCourse(Number(courseId))
-            .then((modules) =>
-                dispatch(setModules(modules))
-            );
+        // Fetch modules for the course from the backend
+        client.findModulesForCourse(String(courseId))
+            .then((modules) => {
+            console.log(modules)   ;
+                setModuleList(modules);
+            });
     }, [courseId]);
+
     const handleDeleteModule = (moduleId: string) => {
-        client.deleteModule(moduleId).then((status) => {
-            dispatch(deleteModule(moduleId));
-        });
+        // Call the backend function to delete the module
+        client.deleteModule(moduleId)
+            .then(() => {
+                // Remove the deleted module from the module list
+                setModuleList(moduleList.filter((module) => module._id !== moduleId));
+            });
     };
 
     const handleAddModule = () => {
-        client.createModule(courseId, module).then((module) => {
-            dispatch(addModule(module));
-        });
+        // Call the backend function to create a new module
+        client.createModule(courseId, module)
+            .then((createdModule) => {
+                // Add the created module to the module list
+                setModuleList([...moduleList, createdModule]);
+            });
     };
+
     const handleUpdateModule = async () => {
-        const status = await client.updateModule(module);
-        dispatch(updateModule(module));
+        // Call the backend function to update the module
+        await client.updateModule(module);
+        // Update the module in the module list
+        setModuleList(moduleList.map((m) => (m._id === module._id ? module : m)));
     };
 
-
-    const dispatch = useDispatch();
     return (
         <ul className="list-group">
             <li className="list-group-item">
+                {/* Input fields for adding/updating module */}
                 <button onClick={handleAddModule}>Add</button>
                 <button onClick={handleUpdateModule}>Update</button>
                 <input
                     value={module.name}
-                    onChange={(e) =>
-                        dispatch(setModule({ ...module, name: e.target.value }))
-                    }/>
+                    onChange={(e) => setModule({ ...module, name: e.target.value })}
+                />
                 <textarea
                     value={module.description}
-                    onChange={(e) =>
-                        dispatch(setModule({ ...module, description: e.target.value }))
-                    }/>
+                    onChange={(e) => setModule({ ...module, description: e.target.value })}
+                />
             </li>
+            {/* List of modules */}
             {moduleList
-                .filter((module) => module.course === courseId)
-                .map((module, index) => (
+                .filter((m) => m.course === courseId)
+                .map((m, index) => (
                     <li key={index} className="list-group-item">
-                        <button
-                            onClick={() => dispatch(setModule(module))}>
-                            Edit
-                        </button>
-                        <button
-                            onClick={() =>  handleDeleteModule(module._id)}>
-                            Delete
-                        </button>
-                        <h3>{module.name}</h3>
-                        <p>{module.description}</p>
+                        <button onClick={() => setModule(m)}>Edit</button>
+                        <button onClick={() => handleDeleteModule(m._id)}>Delete</button>
+                        <h3>{m.name}</h3>
+                        <p>{m.description}</p>
                     </li>
                 ))}
         </ul>
     );
 }
+
 export default ModuleList;

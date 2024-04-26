@@ -1,12 +1,14 @@
 import {Route, Routes, useLocation, useParams} from "react-router-dom";
 import { HiMiniBars3 } from "react-icons/hi2";
 import "./index.css"
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modules from "./Modules";
 import CourseNavigation from "./CourseNavigation";
 import Home from "./Home";
 import Assignments from "./Assignments";
+import Quizzes from "./Quizzes";
+import QuizDetails from "./Quizzes/quizDetails";
 function Courses() {
     const location = useLocation();
     const { courseId } = useParams();
@@ -35,6 +37,7 @@ function Courses() {
                         <Route path="home" element={<Home/>} />
                         <Route path="modules" element={<Modules/>} />
                         <Route path="assignments" element={<Assignments/>} />
+                        <Route path="quizzes/*" element={<Quizzes />}/>
                         <Route path="grades" element={<h1>Grades</h1>} />
                     </Routes>
                 </div>
